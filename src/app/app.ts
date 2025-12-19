@@ -1,4 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 declare global {
   interface Window {
@@ -12,6 +13,7 @@ declare global {
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
+   imports: [CommonModule],
   styleUrls: ['./app.css']
 })
 export class AppComponent implements OnInit {
@@ -20,7 +22,6 @@ export class AppComponent implements OnInit {
   previewImage: string | null = null;
   previewLabel: string = '';
   receivedIsoData: string = '';
-  constructor(private zone: NgZone) {}
 
   ngOnInit(): void {
     window.onImageReceived = this.onImageReceived.bind(this);
@@ -28,25 +29,36 @@ export class AppComponent implements OnInit {
     window.collectIsoData = this.collectIsoData.bind(this);
   }
 
-  capture(type: string): void {
-    this.clearPreview();
+  constructor(private zone: NgZone) {
+    // expose callback for native bridge
+      this.status = 'Fingerprint captured successfully';
+    (window as any).onBiometricCompletion = (base64Data: string) => {
+      this.zone.run(() => {
+        this.previewImage = 'data:image/jpeg;base64,' + base64Data;
+        this.previewLabel = 'Fingerprint';
+      });
+      return true;
+    };
+  }
+
+  capture(type: string) {
     this.status = `Requesting ${type.replace('_', ' ')}...`;
 
-    if (window.TWJSBridge?.onButtonClick) {
-      window.TWJSBridge.onButtonClick(type);
+    if ((window as any).TWJSBridge?.onButtonClick) {
+      (window as any).TWJSBridge.onButtonClick(type);
     } else {
-      this.status = 'TWJSBridge not initialized';
+      this.status = 'TWJSBridge is not initialized';
     }
   }
 
   /* 🔥 ANDROID → IMAGE */
   onImageReceived(type: string, base64Data: string): boolean {
+          this.status = `Image captured successfully`;
     this.zone.run(() => {
-      console.error('onImageReceived.././././');
+      console.error('onImageReceived.././././', type , base64Data);
 
       this.previewImage = `data:image/jpeg;base64,${base64Data}`;
       this.previewLabel = type.replace('_', ' ');
-      this.status = ` captured successfully`;
     });
     return true;
   }
@@ -58,10 +70,10 @@ export class AppComponent implements OnInit {
 
   /* 🔥 ANDROID → ISO */
   collectIsoData(chunk: string): string {
+      this.status = 'ISO Data Received........';
     this.zone.run(() => {
-      console.error('Received ISO data:././//', chunk);
+      console.error('Received ISO data:.......', chunk);
       this.receivedIsoData = chunk;
-      this.status = 'ISO Data Received././.';
     });
     return 'true';
   }
