@@ -65,7 +65,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "host": "10.10.10.101"
+            "allowedHosts": ["0a091af61f05.ngrok-free.app"]
           }
         },
         "test": {

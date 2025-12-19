@@ -15,8 +15,10 @@
 
   <div id="status">Status: {{ status }}</div>
 
-  <div id="preview" *ngIf="previewImage">
-    <img [src]="previewImage" alt="Preview">
-    <div class="label">{{ previewLabel }}</div>
+  <div id="preview" *ngIf="previewImage" style="display: block; margin-top: 24px; text-align: center;">
+    <img [src]="previewImage" alt="Capture Preview" style="width: 300px; height: auto; border-radius: 6px; border: 1px solid #9ca3af;">
+    <div class="label" style="margin-top: 8px; font-size: 14px; font-weight: 500;">{{ previewLabel }}</div>
   </div>
 </div>
+
+
