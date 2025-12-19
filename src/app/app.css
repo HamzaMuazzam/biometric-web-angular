@@ -1,0 +1,116 @@
+
+* {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f1f5f9;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            color: #1f2933;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 8px;
+            width: 400px;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin: 0 0 24px 0;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            color: #111827;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 12px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 16px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            background: #e5e7eb;
+            color: #111827;
+            transition: background 0.2s ease, border 0.2s ease;
+        }
+
+        button:hover {
+            background: #d1d5db;
+        }
+
+        .btn-finger {
+            background: #1f2937;
+            color: #ffffff;
+        }
+
+        .btn-finger:hover {
+            background: #111827;
+        }
+
+        .btn-front {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-front:hover {
+            background: #1e40af;
+        }
+
+        .btn-back {
+            background: #475569;
+            color: #ffffff;
+        }
+
+        .btn-back:hover {
+            background: #334155;
+        }
+
+        #status {
+            margin-top: 24px;
+            background: #f9fafb;
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #374151;
+            min-height: 40px;
+        }
+
+        #preview {
+            margin-top: 24px;
+            display: none;
+            text-align: center;
+        }
+
+        #preview img {
+            width: 300px;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #9ca3af;
+            background: #ffffff;
+        }
+
+        .label {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+        }
